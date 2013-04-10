@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="valorCompras" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select *, SUM(mc.preco_matcom*mc.quant_matcom) as valortotal from fornecedor as f, compra as c, material_compra as mc where c.id_fornec_compra = f.id_fornec and c.id_compra = mc.compra_id_matcom group by mc.compra_id_matcom;]]>
+	</queryString>
+	<field name="id_fornec" class="java.lang.Integer"/>
+	<field name="rz_soc_fornec" class="java.lang.String"/>
+	<field name="end_fornec" class="java.lang.String"/>
+	<field name="email_fornec" class="java.lang.String"/>
+	<field name="cpf_cnpj_fornec" class="java.lang.String"/>
+	<field name="dt_cad_fornec" class="java.sql.Timestamp"/>
+	<field name="contato_fornec" class="java.lang.String"/>
+	<field name="id_compra" class="java.lang.Integer"/>
+	<field name="data_pedido_compra" class="java.sql.Date"/>
+	<field name="id_fornec_compra" class="java.lang.Integer"/>
+	<field name="id_almoxarife_compra" class="java.lang.Integer"/>
+	<field name="id_matcom" class="java.lang.Integer"/>
+	<field name="preco_matcom" class="java.math.BigDecimal"/>
+	<field name="quant_matcom" class="java.lang.Long"/>
+	<field name="compra_id_matcom" class="java.lang.Integer"/>
+	<field name="id_mat_matcom" class="java.lang.Integer"/>
+	<field name="valortotal" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="366" height="79"/>
+				<textElement>
+					<font fontName="Arial" size="48"/>
+				</textElement>
+				<text><![CDATA[Compras]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="22" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="0" width="267" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="107" y="0" width="160" height="20"/>
+				<textElement/>
+				<text><![CDATA[Data do Pedido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="107" height="20"/>
+				<textElement/>
+				<text><![CDATA[Código da Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="0" width="160" height="20"/>
+				<textElement/>
+				<text><![CDATA[Valor total da Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="0" width="374" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nome do Fornecedor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="107" y="0" width="160" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{data_pedido_compra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="107" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{id_compra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="642" y="0" width="160" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{valortotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="268" y="0" width="374" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{rz_soc_fornec}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="107" height="20"/>
+				<textElement/>
+				<text><![CDATA[Código da Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="642" y="0" width="160" height="20"/>
+				<textElement/>
+				<text><![CDATA[Valor total da Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="107" y="0" width="160" height="20"/>
+				<textElement/>
+				<text><![CDATA[Data do Pedido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="268" y="0" width="374" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nome do Fornecedor]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="483" y="4" width="193" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="678" y="4" width="124" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

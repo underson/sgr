@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="scaPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>br.com.sca.entidades.Almoxarife</class>
+    <class>br.com.sca.entidades.Telefone</class>
+    <class>br.com.sca.entidades.Fornecedor</class>
+    <class>br.com.sca.entidades.MaterialCompra</class>
+    <class>br.com.sca.entidades.Requisicao</class>
+    <class>br.com.sca.entidades.Compra</class>
+    <class>br.com.sca.entidades.Funcionario</class>
+    <class>br.com.sca.entidades.Categoria</class>
+    <class>br.com.sca.entidades.Departamento</class>
+    <class>br.com.sca.entidades.Materiais</class>
+    <class>br.com.sca.entidades.MaterialRequisicao</class>
+    <class>br.com.sca.entidades.FuncionarioDepartamento</class>
+    <class>br.com.sca.entidades.MtCompraEntregue</class>
+    <shared-cache-mode>NONE</shared-cache-mode>
+    <properties>
+      <property name="eclipselink.ddl-generation" value="create-tables" />
+      <property name="eclipselink.ddl-generation.output-mode" value="database" />
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sca"/>
+      <property name="javax.persistence.jdbc.password" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+    </properties>
+  </persistence-unit>
+</persistence>

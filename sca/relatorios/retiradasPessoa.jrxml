@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="retiradasPessoa" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select * from funcionario as f, almoxarife as a, departamento as d, requisicao as r, materiais as m, material_requisicao as mr where m.id_mat = mr.id_matreq and mr.id_req_matreq = r.id_req and f.id_func = r.id_func_req and a.id_almoxarife = r.id_almoxarife_req and d.id_dept = r.id_dept_req group by r.id_req order by r.data_req asc;]]>
+	</queryString>
+	<field name="id_func" class="java.lang.Integer"/>
+	<field name="cpf_func" class="java.lang.String"/>
+	<field name="nome_func" class="java.lang.String"/>
+	<field name="dt_cad_func" class="java.sql.Timestamp"/>
+	<field name="ativo_func" class="java.lang.Boolean"/>
+	<field name="id_dept_func" class="java.lang.Integer"/>
+	<field name="id_almoxarife" class="java.lang.Integer"/>
+	<field name="login_almoxarife" class="java.lang.String"/>
+	<field name="senha_almoxarife" class="java.lang.String"/>
+	<field name="ativo_almoxarife" class="java.lang.Boolean"/>
+	<field name="supervisor_almoxarife" class="java.lang.Boolean"/>
+	<field name="id_func_almoxarife" class="java.lang.Integer"/>
+	<field name="id_dept" class="java.lang.Integer"/>
+	<field name="nome_dept" class="java.lang.String"/>
+	<field name="desc_dept" class="java.lang.String"/>
+	<field name="dt_cad_dept" class="java.sql.Timestamp"/>
+	<field name="ativo_dept" class="java.lang.Boolean"/>
+	<field name="id_req" class="java.lang.Integer"/>
+	<field name="data_req" class="java.sql.Timestamp"/>
+	<field name="id_func_req" class="java.lang.Integer"/>
+	<field name="id_almoxarife_req" class="java.lang.Integer"/>
+	<field name="id_dept_req" class="java.lang.Integer"/>
+	<field name="observacao_req" class="java.lang.String"/>
+	<field name="id_mat" class="java.lang.Integer"/>
+	<field name="nome_mat" class="java.lang.String"/>
+	<field name="qtd_estq_mat" class="java.lang.Long"/>
+	<field name="qtd_min_mat" class="java.lang.Long"/>
+	<field name="tipo_mat" class="java.lang.String"/>
+	<field name="desc_mat" class="java.lang.String"/>
+	<field name="dt_cad_mat" class="java.sql.Timestamp"/>
+	<field name="categ_id_mat" class="java.lang.Integer"/>
+	<field name="ativo_mat" class="java.lang.Boolean"/>
+	<field name="id_matreq" class="java.lang.Integer"/>
+	<field name="qtd_matreq" class="java.lang.Long"/>
+	<field name="id_mat_matreq" class="java.lang.Integer"/>
+	<field name="id_req_matreq" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="286" height="79"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="48"/>
+				</textElement>
+				<text><![CDATA[Requisições]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="23" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="0" width="223" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="223" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nome do Funcionário/Professor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="678" y="0" width="124" height="20"/>
+				<textElement/>
+				<text><![CDATA[Data da Requisição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="223" y="0" width="155" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nome do Departamento destino]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="0" width="200" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nome do Material]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="578" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="223" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nome_func}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="678" y="0" width="124" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{data_req}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="223" y="0" width="155" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nome_dept}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="378" y="0" width="200" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{nome_mat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="578" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{qtd_matreq}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="378" y="0" width="200" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nome do Material]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="578" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="678" y="0" width="124" height="20"/>
+				<textElement/>
+				<text><![CDATA[Data da Requisição]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="223" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nome do Funcionário/Professor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="223" y="0" width="155" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nome do Departamento destino]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="485" y="5" width="193" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="678" y="5" width="124" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

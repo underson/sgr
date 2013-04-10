@@ -1,0 +1,35 @@
+Requisições:
+
+Localizando todas as requisições de todos os funcionarios:
+select * from funcionario as f, almoxarife as a, departamento as d, requisicao as r, materiais as m, material_requisicao as mr where m.id_mat = mr.id_matreq and mr.id_req_matreq = r.id_req and f.id_func = r.id_func_req and a.id_almoxarife = r.id_almoxarife_req and d.id_dept = r.id_dept_req group by r.id_req order by r.data_req asc;
+
+Localizando todas as requisições de um funcionario especifico:
+select * from funcionario as f, almoxarife as a, departamento as d, requisicao as r, materiais as m, material_requisicao as mr where m.id_mat = mr.id_matreq and mr.id_req_matreq = r.id_req and f.id_func = r.id_func_req and a.id_almoxarife = r.id_almoxarife_req and d.id_dept = r.id_dept_req and f.id_func = '0' group by r.id_req order by r.data_req asc;
+
+Localizando todas as requisições de todos os funcionarios em um período de tempo:
+select * from funcionario as f, almoxarife as a, departamento as d, requisicao as r, materiais as m, material_requisicao as mr where m.id_mat = mr.id_matreq and mr.id_req_matreq = r.id_req and f.id_func = r.id_func_req and a.id_almoxarife = r.id_almoxarife_req and d.id_dept = r.id_dept_req and r.data_req >= 'data inicial' and r.data_req <= 'data final' group by r.id_req order by r.data_req asc;
+
+Localizando todas as requisições de um funcionário específico em um período de tempo:
+select * from funcionario as f, almoxarife as a, departamento as d, requisicao as r, materiais as m, material_requisicao as mr where m.id_mat = mr.id_matreq and mr.id_req_matreq = r.id_req and f.id_func = r.id_func_req and a.id_almoxarife = r.id_almoxarife_req and d.id_dept = r.id_dept_req and r.data_req >= 'data inicial' and r.data_req <= 'data final' and f.id_func = '0' group by r.id_req order by r.data_req asc;
+
+
+
+Compras:
+
+Localizando todas as compras:
+select *, SUM(mc.preco_matcom*mc.quant_matcom) as valortotal from fornecedor as f, compra as c, material_compra as mc where c.id_fornec_compra = f.id_fornec and c.id_compra = mc.compra_id_matcom group by mc.compra_id_matcom order by c.data_entrega_compra;
+
+Localizando todas as compras de um período específico da entrega:
+select *, SUM(mc.preco_matcom*mc.quant_matcom) as valortotal from fornecedor as f, compra as c, material_compra as mc where c.id_fornec_compra = f.id_fornec and c.id_compra = mc.compra_id_matcom and c.data_entrega_compra >= 'data inicial' and c.data_entrega_compra <= 'data final' group by mc.compra_id_matcom order by c.data_entrega_compra;
+
+Localizando todas as compras de um período específico da inclusao:
+select *, SUM(mc.preco_matcom*mc.quant_matcom) as valortotal from fornecedor as f, compra as c, material_compra as mc where c.id_fornec_compra = f.id_fornec and c.id_compra = mc.compra_id_matcom and c.data_pedido_compra >= 'data inicial' and c.data_pedido_compra <= 'data final' group by mc.compra_id_matcom order by c.data_entrega_compra;
+
+
+Materiais:
+
+Localizar todos os materiais:
+select * from materiais;
+
+Localizar todos os materiais com a quantidade atual igual ou menor à quantidade mínima:
+select * from materiais where qtd_estq_mat <= qtd_min_mat;
